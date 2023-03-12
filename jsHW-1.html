@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <style>
+            .table thead{
+                background-color: black;
+                color: white;
+            }
+            .table tbody{
+                background-color: white;
+            }
+            .table thead th{
+                border-right: 0.8px solid #dee2e6;
+            }
+            .table tbody td{
+                border-right: 0.8px solid #dee2e6;
+                border-bottom: 0.8px solid #dee2e6;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="jumbotron bg-info">
+        <h1>JavaScript-DOM 與 JSON 練習</h1>
+    </div>
+    <div id="container">
+    </div>
+
+    <table class="table">
+        
+    </table>
+    <script>
+
+        let WaferCompany ={
+            Titles : ['排名', '公司', '國別', '市占率%'],
+            Company: [
+            { Rank:1 , company:"台積電",  country :"台灣", share: 53.1},
+            { Rank:2 , company:"三星電子",  country :"韓國", share: 17.3},
+            { Rank:3 , company:"聯電",  country :"台灣", share: 7.2},
+            { Rank:4 , company:"格羅方德",  country :"美國", share: 6.1},
+            { Rank:5 , company:"中芯國際",  country :"中國", share: 5.3},
+            { Rank:6 , company:"華虹半導體",  country :"中國", share: 2.6},
+            { Rank:7 , company:"方積電",  country :"台灣", share: 1.8},
+            { Rank:8 , company:"世界先進",  country :"台灣", share: 1.4},
+            { Rank:9 , company:"高塔半導體",  country :"以色列", share: 1.4},
+            { Rank:10 , company:"東部高科",  country :"南韓", share: 1}
+            ]
+        }
+
+
+        let WaferCompanyArray = [];
+
+        let container;
+        let table, thead, tbody;
+        window.onload =function(){
+            container = document.getElementById('container');
+            table = document.createElement('table');
+            table.setAttribute("class", "table");
+            thead = document.createElement('thead');
+            tbody = document.createElement('tbody');
+            Thead(WaferCompany.Titles);
+            WaferCompany.Company.forEach(company=>{
+                let values = Object.values(company);
+                WaferCompanyArray.push(values);
+            });
+
+            Tbody(WaferCompanyArray);
+        }
+
+        function Thead(title){
+            let theadTr = document.createElement("tr");
+            title.forEach((item, index)=>{
+                let th = document.createElement("th");
+                th.innerText = item;
+                theadTr.append(th);
+            });
+            thead.append(theadTr);
+            table.append(thead);
+            container.append(table);
+        }
+
+        function Tbody(waferCompany){
+            waferCompany.forEach(company => {
+                let tr = document.createElement("tr");
+                company.forEach(item => {
+                    let td = document.createElement("td");
+                    td.innerText = item;
+                    tr.append(td);
+                });
+                tbody.append(tr);
+            })
+            table.append(tbody);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+        integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
